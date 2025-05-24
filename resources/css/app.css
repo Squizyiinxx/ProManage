@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@custom-variant dark (&:is(.dark *));
+@theme inline {
+    --font-sans:
+        'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar-background);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+:root {
+    /* Light theme - Default */
+    --background: hsl(210, 50%, 98%);
+    --foreground: hsl(214, 80%, 20%);
+    --card: hsl(0, 0%, 100%);
+    --card-foreground: hsl(214, 80%, 20%);
+    --popover: hsl(0, 0%, 100%);
+    --popover-foreground: hsl(214, 80%, 20%);
+    --primary: hsl(214, 80%, 25%); /* Navy blue from logo */
+    --primary-foreground: hsl(0, 0%, 100%);
+    --secondary: hsl(100, 65%, 50%); /* Bright green from logo */
+    --secondary-foreground: hsl(214, 80%, 25%);
+    --muted: hsl(210, 40%, 96%);
+    --muted-foreground: hsl(214, 25%, 40%);
+    --accent: hsl(100, 65%, 92%); /* Light green accent */
+    --accent-foreground: hsl(214, 80%, 25%);
+    --destructive: hsl(0, 84%, 60%);
+    --destructive-foreground: hsl(0, 0%, 100%);
+    --border: hsl(214, 20%, 90%);
+    --input: hsl(214, 15%, 90%);
+    --ring: hsl(214, 80%, 40%);
+
+    /* Chart colors - Professional data visualization palette */
+    --chart-1: hsl(214, 80%, 35%); /* Primary blue */
+    --chart-2: hsl(100, 65%, 45%); /* Secondary green */
+    --chart-3: hsl(214, 50%, 60%); /* Light blue */
+    --chart-4: hsl(140, 55%, 45%); /* Teal */
+    --chart-5: hsl(35, 85%, 65%); /* Gold accent */
+
+    --radius: 0.375rem; /* Slightly reduced for professional look */
+
+    /* Sidebar styling */
+    --sidebar-background: hsl(214, 80%, 15%);
+    --sidebar-foreground: hsl(0, 0%, 95%);
+    --sidebar-primary: hsl(100, 65%, 50%);
+    --sidebar-primary-foreground: hsl(214, 80%, 15%);
+    --sidebar-accent: hsl(214, 40%, 25%);
+    --sidebar-accent-foreground: hsl(0, 0%, 100%);
+    --sidebar-border: hsl(214, 50%, 20%);
+    --sidebar-ring: hsl(100, 65%, 50%);
+}
+
+@layer utilities {
+    body,
+    html {
+        --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    }
+    @keyframes overlayShow {
+        0% {
+            opacity: 0;
+            backdrop-filter: blur(0px);
+        }
+        100% {
+            opacity: 1;
+            backdrop-filter: blur(4px);
+        }
+    }
+    @keyframes contentShow {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -46%) scale(0.95);
+        }
+        100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+    @keyframes slideDownAndFade {
+        from {
+            opacity: 0;
+            transform: translateY(-2px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideUpAndFade {
+        from {
+            opacity: 0;
+            transform: translateY(2px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideLeftAndFade {
+        from {
+            opacity: 0;
+            transform: translateX(2px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideRightAndFade {
+        from {
+            opacity: 0;
+            transform: translateX(-2px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes slidesAccordionDown {
+        from {
+            height: 0;
+        }
+        to {
+            height: 50px;
+        }
+    }
+
+    @keyframes slidesAccordionUp {
+        from {
+            height: 50px;
+        }
+        to {
+            height: 0;
+        }
+    }
+    .animate-accordionDown {
+        animation: slidesAccordionDown 500ms cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    .animate-accordionUp {
+        animation: slidesAccordionUp 500ms cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+    .animate-slideDownAndFade {
+        animation: slideDownAndFade 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-slideUpAndFade {
+        animation: slideUpAndFade 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-slideLeftAndFade {
+        animation: slideLeftAndFade 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-slideRightAndFade {
+        animation: slideRightAndFade 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .overlayShow {
+        animation: overlayShow 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .contentShow {
+        animation: contentShow 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+}
+
+input::-webkit-calendar-picker-indicator,
+input::-webkit-clear-button,
+input::-webkit-inner-spin-button,
+input::-webkit-search-cancel-button,
+input::-webkit-file-upload-button {
+    opacity: 1;
+    cursor: pointer;
+    filter: brightness(0) saturate(100%) invert(41%) sepia(59%) saturate(2349%) hue-rotate(174deg) brightness(95%) contrast(96%);
+}
+
+html.dark input::-webkit-calendar-picker-indicator,
+html.dark input::-webkit-clear-button,
+html.dark input::-webkit-inner-spin-button,
+html.dark input::-webkit-search-cancel-button,
+html.dark input::-webkit-file-upload-button {
+    filter: brightness(0) saturate(100%) invert(84%) sepia(17%) saturate(2570%) hue-rotate(186deg) brightness(92%) contrast(91%);
+}
+input[type='date'],
+input[type='time'],
+input[type='number'],
+input[type='search'],
+input[type='file'] {
+    color-scheme: light dark;
+}
+
+.dark {
+    --background: hsl(214, 80%, 10%);
+    --foreground: hsl(0, 0%, 95%);
+    --card: hsl(214, 70%, 12%);
+    --card-foreground: hsl(0, 0%, 95%);
+    --popover: hsl(214, 70%, 12%);
+    --popover-foreground: hsl(0, 0%, 95%);
+    --primary: hsl(100, 65%, 50%);
+    --primary-foreground: hsl(214, 80%, 15%);
+    --secondary: hsl(214, 50%, 40%);
+    --secondary-foreground: hsl(0, 0%, 100%);
+    --muted: hsl(214, 40%, 18%);
+    --muted-foreground: hsl(214, 15%, 70%);
+    --accent: hsl(214, 60%, 20%);
+    --accent-foreground: hsl(100, 65%, 50%);
+    --destructive: hsl(0, 84%, 60%);
+    --destructive-foreground: hsl(0, 0%, 98%);
+    --border: hsl(214, 40%, 20%);
+    --input: hsl(214, 40%, 20%);
+    --ring: hsl(100, 60%, 45%);
+
+    /* Chart colors - Dark mode palette */
+    --chart-1: hsl(100, 65%, 50%); /* Green primary */
+    --chart-2: hsl(214, 60%, 60%); /* Bright blue */
+    --chart-3: hsl(170, 60%, 45%); /* Teal */
+    --chart-4: hsl(35, 85%, 65%); /* Gold */
+    --chart-5: hsl(300, 40%, 60%); /* Purple accent */
+
+    /* Sidebar styling - Dark mode */
+    --sidebar-background: hsl(214, 90%, 8%); /* Darker than main background */
+    --sidebar-foreground: hsl(0, 0%, 95%);
+    --sidebar-primary: hsl(100, 65%, 50%);
+    --sidebar-primary-foreground: hsl(214, 80%, 10%);
+    --sidebar-accent: hsl(214, 50%, 15%);
+    --sidebar-accent-foreground: hsl(100, 65%, 50%);
+    --sidebar-border: hsl(214, 60%, 15%);
+    --sidebar-ring: hsl(100, 65%, 50%);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
